@@ -1,5 +1,28 @@
-title: Merlot theme
-description: Merlot is a theme for GitHub Pages.
-show_downloads: true
-google_analytics:
-theme: jekyll-theme-merlot
+# Site settings
+title:          MSP430-GCC
+description:    "Document for MSP430 programming with GCC"
+url:            "https://nhivp.github.io"
+
+# Author
+author:
+  name:         Nhi Pham
+  url:          https://nhivp.github.io
+  email:        vanngibka@gmail.com
+
+# Build settings
+markdown:       kramdown
+
+# Assets
+sass:
+  sass_dir:     _sass
+  style:        compressed
+
+# Gems
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+  # - jemoji #Uncomment this to allow emoji in your post
+
+# Permalinks
+permalink:      /:year-:month-:day/:title
+paginate:       5
