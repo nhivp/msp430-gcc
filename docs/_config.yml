@@ -1,4 +1,5 @@
+title: Merlot theme
+description: Merlot is a theme for GitHub Pages.
+show_downloads: true
+google_analytics:
 theme: jekyll-theme-merlot
-title: MSP430 & GCC
-description: Using GCC in MSP430 projects
-show_downloads: false
