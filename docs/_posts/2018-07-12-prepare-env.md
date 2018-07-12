@@ -16,7 +16,8 @@ The following are required tools for the MSP430 programming.
 ## mspdebug
 
 * Install libraries dependecy:
-  >$ sudo apt-get install libusb-dev sudo apt-get install libreadline-dev
+  >$ sudo apt-get install libusb-dev
+  >$ sudo apt-get install libreadline-dev
 * Get a latest version at [mspdebug-release](https://github.com/dlbeer/mspdebug/releases)
 * Unzip this source to somewhere: ```tar xvfz mspdebug-0.25.tar.gz```
 * Go to its source code: ```cd mspdebug-0.25/```
