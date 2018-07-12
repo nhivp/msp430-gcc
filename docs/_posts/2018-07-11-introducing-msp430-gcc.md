@@ -20,12 +20,12 @@ The purpose of this project is used to learning the msp430g2 microcontroller fro
 
 In this project, the Ubuntu PC will be used for developing. So, all software tools are running on Linux environment. Some tools are used as following:
 
-  * [gcc-msp430](http://www.ti.com/tool/MSP430-GCC-OPENSOURCE)
+* [gcc-msp430](http://www.ti.com/tool/MSP430-GCC-OPENSOURCE)
   > Open Source Compiler for MSP Microcontrollers
 
-  * [mspdebug](https://dlbeer.co.nz/mspdebug/)
+* [mspdebug](https://dlbeer.co.nz/mspdebug/)
   > A free debugger for use with MSP430 MCUs.
 
 ## Reference
 
-The reference documents are listed at [reference](../../reference/README.md) folder.
+The reference documents are listed at [reference](https://github.com/nhivp/msp430-gcc/tree/master/reference) folder.
