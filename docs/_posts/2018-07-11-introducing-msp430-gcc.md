@@ -28,4 +28,4 @@ In this project, the Ubuntu PC will be used for developing. So, all software too
 
 ## Reference
 
-The reference documents are listed at [reference](../../reference) folder.
+The reference documents are listed at [reference](../../reference/README.md) folder.
