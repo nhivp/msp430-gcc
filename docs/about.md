@@ -10,3 +10,5 @@ I learned the microcontroller programming for 4 years, and the msp430g2553 is my
 I got a lot of difficulty with the msp430g2553 programming for the first time. And day by day I got knowledge about the MCU programming. So I write this blog with viewpoint that we are learning the microcontroller from scratch. Because the msp430g2553 is small 16-bit RISC CPU, it is relevant to whom want to learn the MCU programming from scratch.
 
 Thanks for reading!
+
+Go to [Github repo](https://nhivp.github.io/msp430-gcc) or [my website](https://nhivp.github.io).
