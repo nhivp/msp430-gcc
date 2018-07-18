@@ -16,3 +16,19 @@
   (mspdebug) prog blink.o
   (mspdebug) run
   ```
+
+## With Makefile
+
+* Compile
+
+  ```shell
+  $ make
+  ```
+
+* Flash
+
+  ```shell
+  $ mspdebug rf2500
+  (mspdebug) prog blink.o
+  (mspdebug) run
+  ```
