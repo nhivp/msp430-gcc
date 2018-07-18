@@ -11,4 +11,4 @@ I got a lot of difficulty with the msp430g2553 programming for the first time. A
 
 Thanks for reading!
 
-Go to [Github repo](https://nhivp.github.io/msp430-gcc) or [my website](https://nhivp.github.io).
+Go to [Github repo](https://github.com/nhivp/msp430-gcc) or [my website](https://nhivp.github.io).
