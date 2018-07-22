@@ -4,6 +4,8 @@ title: "Compilation process of a msp430g2553 project"
 author: "Nhi Pham"
 ---
 
+> The compiler is responsible for allocating memory for definitions (static and automatic) and generating opcodes from program statements. A relocatable object file (.o) is produced.  The assembler also produces .o files from assembly-language source.
+
 Understanding the compilation process is helpful for us to analyze and detect the problem with ease in compilation process.
 
 The compilation process is the important things for a beginner in microcontroller programming. Some people don't understand it with clarify, that results in they can't fix a problem from the compiling time.
@@ -192,7 +194,7 @@ void main(void)
 }
 ```
 
-After passing the preprocessor stage, the compiler will compile the source code (blink.i) into objects file (blink.o).
+After passing the preprocessor stage, the compiler will compile the source code (blink.i) into objects file (blink.o). The object file contains the compiled source code – opcodes and data sections.  Note that the object file only contains the sections for static variables.  At this stage, section locations are not fixed.
 
 ```shell
 $ msp430-gcc -c blink.i -o blink.o
@@ -214,4 +216,4 @@ In the linking stage, we often get some errors like:
 * Multiple definition a funtion or variable. This error will occur when linking all objects file into a executable file.
 * Lack of linker script.
 
-To investigate compilation process with more source code such as assembly code, library, ... You can read more at [link](http://www.bogotobogo.com/cplusplus/embeddedSystemsProgramming_gnu_toolchain_ARM_cross_compiler.php).
+To investigate compilation process with more source code such as assembly code, library, ... You can read more at [link](http://www.bogotobogo.com/cplusplus/embeddedSystemsProgramming_gnu_toolchain_ARM_cross_compiler.php) or [this](https://blog.feabhas.com/2012/06/the-c-build-process/).
