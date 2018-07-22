@@ -104,7 +104,7 @@ The output is in the form of preprocessed source code, which is sent to the stan
 
 The preprocessed output file is quite large. There are three things that preprocessor does:
 
-1. It removes all the comments from our program blink.c
+* It removes all the comments from our program blink.c
 
   Before:
 
@@ -140,11 +140,11 @@ The preprocessed output file is quite large. There are three things that preproc
   }
   ```
 
-2. It includes code from header and source file
+* It includes code from header and source file
 
   You can see the header files (```msp430g2553.h```, ```iomacros.h``` and ```intrinsics.h```) included into the preprocessed file (```blink.i```).
 
-3. It replaces macros (if there are any that are used in the program) with code.
+* It replaces macros (if there are any that are used in the program) with code.
 
   Before:
 
@@ -204,5 +204,14 @@ drwxrwxr-x 4 nhivp nhivp 4096 Th07 22 15:24 ../
 -rw-rw-r-- 1 nhivp nhivp 8719 Th07 22 18:30 blink.i
 -rw-rw-r-- 1 nhivp nhivp  788 Th07 22 18:32 blink.o
 ```
+
+From this stage, you can get error (if any) such as syntax of C, lack of header files, ...
+
+With multiple object files, we will link them by using the ```msp430-ld``` with a linker script. You can find the linker scripts in the support files. It consists of the ```msp430g2553.ld``` and ```msp430g2553_symbols.ld```.
+
+In the linking stage, we often get some errors like:
+
+* Multiple definition a funtion or variable. This error will occur when linking all objects file into a executable file.
+* Lack of linker script.
 
 To investigate compilation process with more source code such as assembly code, library, ... You can read more at [link](http://www.bogotobogo.com/cplusplus/embeddedSystemsProgramming_gnu_toolchain_ARM_cross_compiler.php).
