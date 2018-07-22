@@ -1,6 +1,6 @@
 TOPDIR	= $(CURDIR)
 
-SRCS    = $(TOPDIR)/src/*
+SRCS    = $(TOPDIR)/*
 OBJECTS = blink.o
 
 SUPPORT_FILE_DIRECTORY += ~/tools/msp430-elf
@@ -15,6 +15,10 @@ CFLAGS += -L $(SUPPORT_FILE_DIRECTORY)/lib/ldscripts
 CFLAGS += -T $(SUPPORT_FILE_DIRECTORY)/lib/ldscripts/msp430g2553.ld
 LFLAGS =
 
-blink.o: src/blink.c
+blink.o: blink.c
 	$(CC) $(CFLAGS) $(<) -o $(@)
 
+clean:
+	rm -rf *.o *.out *.elf *.bin
+
+.PHONY: clean
