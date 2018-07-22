@@ -42,8 +42,8 @@ void main(void)
 To compile the program, the compiler will prefrom the preprocessor stage by command ```msp430-gcc -E blink.c -o blink.i``` (The compiling options for the target are ignored, you only focus on the main command for the compilation process).
 
 ```shell
-nhivp@nhipham:~/mcu/msp430-gcc/demo/blinky/src$ msp430-gcc -E blink.c -o blink.i
-nhivp@nhipham:~/mcu/msp430-gcc/demo/blinky/src$ ll
+$ msp430-gcc -E blink.c -o blink.i
+$ ll
 total 24
 drwxrwxr-x 2 nhivp nhivp 4096 Th07 22 16:59 ./
 drwxrwxr-x 4 nhivp nhivp 4096 Th07 22 15:24 ../
@@ -104,7 +104,7 @@ The output is in the form of preprocessed source code, which is sent to the stan
 
 The preprocessed output file is quite large. There are three things that preprocessor does:
 
-  * It removes all the comments from our program blink.c
+1. It removes all the comments from our program blink.c
 
   Before:
 
@@ -140,11 +140,11 @@ The preprocessed output file is quite large. There are three things that preproc
   }
   ```
 
-  * It includes code from header and source file
+2. It includes code from header and source file
 
   You can see the header files (```msp430g2553.h```, ```iomacros.h``` and ```intrinsics.h```) included into the preprocessed file (```blink.i```).
 
-  * It replaces macros (if there are any that are used in the program) with code.
+3. It replaces macros (if there are any that are used in the program) with code.
 
   Before:
 
@@ -192,6 +192,17 @@ void main(void)
 }
 ```
 
-After passing the preprocessor stage, the compiler will compile the source code (*.c) into objects file (*.o).
+After passing the preprocessor stage, the compiler will compile the source code (blink.i) into objects file (blink.o).
 
-To know compilation process with more source code such as assembly code, library, ... You can read more at [link](http://www.bogotobogo.com/cplusplus/embeddedSystemsProgramming_gnu_toolchain_ARM_cross_compiler.php).
+```shell
+$ msp430-gcc -c blink.i -o blink.o
+$ ll
+total 28
+drwxrwxr-x 2 nhivp nhivp 4096 Th07 22 18:32 ./
+drwxrwxr-x 4 nhivp nhivp 4096 Th07 22 15:24 ../
+-rw-rw-r-- 1 nhivp nhivp  596 Th07 22 18:30 blink.c
+-rw-rw-r-- 1 nhivp nhivp 8719 Th07 22 18:30 blink.i
+-rw-rw-r-- 1 nhivp nhivp  788 Th07 22 18:32 blink.o
+```
+
+To investigate compilation process with more source code such as assembly code, library, ... You can read more at [link](http://www.bogotobogo.com/cplusplus/embeddedSystemsProgramming_gnu_toolchain_ARM_cross_compiler.php).
