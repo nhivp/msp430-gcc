@@ -156,11 +156,11 @@ section [address] [(type)] : [AT(lma)]
 
 ## Assigning Values to Symbols
 
-* PROVIDE
+* ```PROVIDE```
 
   In some cases, it is desirable for a linker script to define a symbol only if it is referenced and is not defined by any object included in the link. For example, traditional linkers defined the symbol etext. However, ANSI C requires that the user be able to use etext as a function name without encountering an error. The PROVIDE keyword may be used to define a symbol, such as etext, only if it is referenced but not defined. The syntax is PROVIDE(symbol = expression).
 
- Here is an example of using PROVIDE to define etext:
+  Here is an example of using PROVIDE to define etext:
 
   ```Makefile
   SECTIONS
@@ -172,11 +172,11 @@ section [address] [(type)] : [AT(lma)]
         PROVIDE(etext = .);
       }
   }
-```
+  ```
 
   In this example, if the program defines _etext (with a leading underscore), the linker will give a multiple definition error. If, on the other hand, the program defines etext (with no leading underscore), the linker will silently use the definition in the program. If the program references etext but does not define it, the linker will use the definition in the linker script.
 
-* KEEP
+* ```KEEP```
 
   When link-time garbage collection is in use (-gc-sections), it is often useful to mark sections that should not be eliminated. This is accomplished by surrounding an input section's wildcard entry with KEEP()
 
@@ -189,6 +189,7 @@ section [address] [(type)] : [AT(lma)]
 * ```ADDR(section)```
 
   Return the absolute address (the VMA) of the named section. Your script must previously have defined the location of that section. In the following example, symbol_1 and symbol_2 are assigned identical values:
+
   ```Makefile
   SECTIONS
   {
