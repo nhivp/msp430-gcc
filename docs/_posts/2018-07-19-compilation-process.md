@@ -53,8 +53,7 @@ drwxrwxr-x 4 nhivp nhivp 4096 Th07 22 15:24 ../
 
 The output is in the form of preprocessed source code, which is sent to the standard output. The following is the output of preprocessor stage.
 
-<details><summary>Click to expand</summary><p>
-
+~~~~~~~~c
     # 1 "blink.c"
     # 1 "<built-in>"
     # 1 "<command-line>"
@@ -318,7 +317,7 @@ The output is in the form of preprocessed source code, which is sent to the stan
             __delay_cycles(200000);
         }
     }
-</p></details>
+~~~~~~~~
 
 The preprocessed output file is quite large. There are three things that preprocessor does:
 
