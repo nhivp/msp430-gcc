@@ -1,7 +1,7 @@
 TOPDIR	= $(CURDIR)
 
 SRCS    = $(TOPDIR)/*
-OBJECTS = blink.o
+OBJECTS = serial_console.o
 
 SUPPORT_FILE_DIRECTORY += ~/tools/msp430-elf
 
@@ -13,14 +13,14 @@ FLASH   = mspdebug
 CFLAGS += -I $(SUPPORT_FILE_DIRECTORY)/include -mmcu=$(DEVICE) -O0 -g
 CFLAGS += -L $(SUPPORT_FILE_DIRECTORY)/lib/ldscripts
 CFLAGS += -T $(SUPPORT_FILE_DIRECTORY)/lib/ldscripts/msp430g2553.ld
-CFLAGS += -Wl,-Map=timer_blink.map
+CFLAGS += -Wl,-Map=serial_console.map
 LFLAGS =
 
-timer_blink.o: timer_blink.c
+serial_console.o: serial_console.c
 	$(CC) $(CFLAGS) $(<) -o $(@)
 
 upload:
-	$(FLASH) rf2500 "prog timer_blink.o"
+	$(FLASH) rf2500 "prog serial_console.o"
 
 clean:
 	rm -rf *.o *.out *.elf *.bin *.map
