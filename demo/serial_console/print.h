@@ -10,3 +10,9 @@ printformat("%3i" , data);
 #include "stdarg.h"
 
 void printformat(char *format, ...);
+
+#ifdef printf
+# undef printf
+# define printf			printformat
+#endif	/* printf */
+

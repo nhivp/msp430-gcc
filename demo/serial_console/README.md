@@ -15,6 +15,8 @@ Implement tiny printf in c
     ```
 
 * test performance
+  * Performance profiling
+  *
 
 ## Reference
 
