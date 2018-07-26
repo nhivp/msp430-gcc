@@ -27,7 +27,7 @@ void main(void)
     DCOCTL = CALDCO_1MHZ; // Set DCO to 1MHz
 
     UARTConfigure();
-    // printformat("[nhi pham]\r\n");
+    printformat("[nhi pham]\r\n");
     UARTSendString("Hello World");
     UARTSendString("\r\n");
 

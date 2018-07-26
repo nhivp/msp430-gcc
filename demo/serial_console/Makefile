@@ -3,13 +3,13 @@ TOPDIR	= $(CURDIR)
 SRCS    := $(wildcard *.c)
 OBJECTS := $(SRCS:.c=.o)
 DEPS    := $(SRCS:.c=.d)
-TARGET  := serial_console.out
+TARGET  := serial_console.elf
 
 SUPPORT_FILE_DIRECTORY += ~/tools/msp430-elf
 
 DEVICE  = msp430g2553
 CC      = msp430-elf-gcc
-LD      = msp430-elf-ld
+LD      = msp430-elf-gcc
 GDB     = msp430-elf-gdb
 FLASH   = mspdebug
 
