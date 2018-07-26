@@ -30,17 +30,18 @@ FLASH   := mspdebug
 #      -gdwarf-2: Source-level debugging (this is the specified DWARF standard) that use a compatible debugger to load, run, and debug images.
 #                  For more information --> http://www.keil.com/support/man/docs/armclang_ref/armclang_ref_chr1409753002958.htm
 #      --gc-sections: Remove unused sections
-#
-CFLAGS := -I $(SUPPORT_FILE_DIRECTORY)/include -I ./ -L $(SUPPORT_FILE_DIRECTORY)/lib/ldscripts -mmcu=$(DEVICE)
+CFLAGS =
+CFLAGS += -I $(SUPPORT_FILE_DIRECTORY)/include -I ./ -L $(SUPPORT_FILE_DIRECTORY)/lib/ldscripts -mmcu=$(DEVICE)
 CFLAGS += -O0 -g -ggdb -gdwarf-2
-CFLAGS += -Wall -Werror -Wextra -Wshadow -std=c99 -Wpedantic --gc-sections
+CFLAGS += -Wall -Wextra -Wshadow -std=c99 -Wpedantic
 
 #  Options for Linker
 #  Details:
 #     -nostartfiles: Do not use the standard system startup files when linking. The standard system libraries are used normally
-LFLAGS := -L $(SUPPORT_FILE_DIRECTORY)/lib/ldscripts -L $(SUPPORT_FILE_DIRECTORY)/include
-LFLAGS += -T $(SUPPORT_FILE_DIRECTORY)/lib/ldscripts/msp430g2553.ld
-LFLAGS += -Wl,-Map=serial_console.map -mmcu=$(DEVICE) -nostartfiles
+LFLAGS =
+LFLAGS += -L $(SUPPORT_FILE_DIRECTORY)/lib/ldscripts -I $(SUPPORT_FILE_DIRECTORY)/include
+LFLAGS += -T $(SUPPORT_FILE_DIRECTORY)/lib/ldscripts/msp430g2553.ld -mmcu=$(DEVICE)
+LFLAGS += -Wl,-Map=serial_console.map
 
 all: $(TARGET) upload
 
@@ -51,7 +52,7 @@ $(TARGET): $(OBJECTS)
 	msp430-elf-objcopy -O ihex $(TARGET).elf $(TARGET).hex
 
 %.o: %.c
-	$(CC) $(CFLAGS) -MD $(subst .c,.d,$<) $< -c -o $@
+	$(CC) $(CFLAGS) -MD -MF $(subst .c,.d,$<) $< -c -o $@
 
 # MSP430G2 Launchpad integrated with the eZ430-RF2500 USB Debugging Interface
 # Options:
@@ -72,6 +73,6 @@ debug:
 	$(GDB) --command=$(TARGET).gdb $(TARGET).elf
 
 clean:
-	rm -rf *.o *.out *.elf *.bin *.map *.d
+	rm -rf *.o *.out *.elf *.bin *.map *.d *.hex *.lss
 
 .PHONY: clean upload debug
