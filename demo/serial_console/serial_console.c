@@ -5,14 +5,15 @@
 ***************************************************************************************/
 
 #include <msp430g2553.h>
+#include "msp430_printf.h"
 
 void UARTConfigure(void);
 void UARTSendChar(unsigned char character);
 void UARTSendArray(unsigned char* TxArray, unsigned char ArrayLength);
 void UARTSendString(char* TxArray);
 
-volatile char UARTRxData[20];
-volatile char UARTRxFlag = 0;
+volatile unsigned char UARTRxData[20];
+volatile unsigned char UARTRxFlag = 0;
 volatile char i=0;
 
 /**************************************************
@@ -26,6 +27,7 @@ void main(void)
     DCOCTL = CALDCO_1MHZ; // Set DCO to 1MHz
 
     UARTConfigure();
+    // printformat("[nhi pham]\r\n");
     UARTSendString("Hello World");
     UARTSendString("\r\n");
 
@@ -53,6 +55,8 @@ void UARTConfigure(void)
     UCA0CTL1 &= ~UCSWRST;  // Initialize USCI state machine
     IE2 |= UCA0RXIE;       // Enable USCI_A0 RX interrupt
 }
+
+__attribute__ ((alias("UARTSendChar"))) int printf(const char *fmt, ...);
 
 void UARTSendChar(unsigned char character)
 {

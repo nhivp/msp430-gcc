@@ -3,10 +3,10 @@ E.g. to format the value stored in variable data as an integer at least three ch
 printformat("%3i" , data);
 */
 
-#ifndef MSP430G2553
-#define MSP430G2553
+#ifndef _MSP430_PRINTF_
+#define _MSP430_PRINTF_
+
 #include <msp430g2553.h>
-#endif
 #include "stdarg.h"
 
 void printformat(char *format, ...);
@@ -16,3 +16,4 @@ void printformat(char *format, ...);
 # define printf			printformat
 #endif	/* printf */
 
+#endif /* _MSP430_PRINTF_ */

@@ -1,4 +1,4 @@
-#include "print.h"
+#include "msp430_printf.h"
 
 void putcharacter(unsigned character);
 void putstring(char *s);
