@@ -31,7 +31,7 @@ FLASH   := mspdebug
 #                  For more information --> http://www.keil.com/support/man/docs/armclang_ref/armclang_ref_chr1409753002958.htm
 #      --gc-sections: Remove unused sections
 CFLAGS =
-CFLAGS += -I $(SUPPORT_FILE_DIRECTORY)/include -I ./ -L $(SUPPORT_FILE_DIRECTORY)/lib/ldscripts -mmcu=$(DEVICE)
+CFLAGS += -I $(SUPPORT_FILE_DIRECTORY)/include -I ./ -L $(SUPPORT_FILE_DIRECTORY)/include -mmcu=$(DEVICE)
 CFLAGS += -O0 -g -ggdb -gdwarf-2
 CFLAGS += -Wall -Wextra -Wshadow -std=c99 -Wpedantic
 
@@ -39,8 +39,8 @@ CFLAGS += -Wall -Wextra -Wshadow -std=c99 -Wpedantic
 #  Details:
 #     -nostartfiles: Do not use the standard system startup files when linking. The standard system libraries are used normally
 LFLAGS =
-LFLAGS += -L $(SUPPORT_FILE_DIRECTORY)/lib/ldscripts -I $(SUPPORT_FILE_DIRECTORY)/include
-LFLAGS += -T $(SUPPORT_FILE_DIRECTORY)/lib/ldscripts/msp430g2553.ld -mmcu=$(DEVICE)
+LFLAGS += -L $(SUPPORT_FILE_DIRECTORY)/include -I $(SUPPORT_FILE_DIRECTORY)/include
+LFLAGS += -T $(SUPPORT_FILE_DIRECTORY)/include/msp430g2553.ld -mmcu=$(DEVICE)
 LFLAGS += -Wl,-Map=serial_console.map
 
 all: $(TARGET) upload
