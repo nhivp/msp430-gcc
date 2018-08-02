@@ -34,7 +34,7 @@ typedef struct
 /*****************************************************************************
  * Private global variables
  *****************************************************************************/
-static GPIO_Management_t GPIO_Mng_Tbl
+static GPIO_Management_t GPIO_Mng_Tbl[]
 {
     {P1DIR, P1IN, P1OUT, P1REN, P1SEL, P1SEL2, P1IES, P1IE, P1IFG, {0, 0, 0, 0, 0, 0, 0, 0}}, /* Port 1 */
     {P2DIR, P2IN, P2OUT, P2REN, P2SEL, P2SEL2, P2IES, P2IE, P2IFG, {0, 0, 0, 0, 0, 0, 0, 0}}  /* Port 2 */
