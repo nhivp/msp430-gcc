@@ -9,11 +9,19 @@
 #include "msp_print.h"
 
 /**
- * Private prototype functions
- **/
-void msp_putc(unsigned char character);
+ *  Exported variables
+ */
+unsigned char* parameterString;
+uint8_t parameterLength;
+bool validCommandFlag;
 
-void uart_init(uint16_t baudrate)
+/**
+ * Private variables
+ */
+static const uint8_t hex_num_tbl[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                                        'A', 'B', 'C', 'D', 'E', 'F'}
+
+void uart_init(void)
 {
     /* Configure hardware UART */
     P1SEL = BIT1 + BIT2 ;  // P1.1 = RXD, P1.2=TXD
@@ -24,23 +32,45 @@ void uart_init(uint16_t baudrate)
     UCA0MCTL = UCBRS0;     // Modulation UCBRSx = 1
     UCA0CTL1 &= ~UCSWRST;  // Initialize USCI state machine
     IE2 |= UCA0RXIE;       // Enable USCI_A0 RX interrupt
-    // msp_putc('N');
 }
 
-void msp_printf(char *format, ...)
+/**
+ * Sends a 8-bit (hexa number) out through UART
+ */
+void msp_putnum8it(uint8_t dec_num)
 {
+    msp_putc(hex_num_tbl[dec_num & 0xF]);
+}
 
+/**
+ * Sends a 16-bit (hexa number) out through UART
+ */
+void msp_putnum16it(uint16_t dec_num)
+{
+    uint8_t temp_hex;
+
+    temp_hex = (uint8_t)(temp_dec & 0xF);
+    /* Print the first number */
+    msp_putc(hex_num_tbl[temp_hex]);
+
+    /* Print the sencond number */
+    temp_hex = 0;
+    temp_hex = (uint8_t)((temp_dec >> 4) & 0xF);
+    msp_putc(hex_num_tbl[temp_hex]);
 }
 
 /**
  * Sends a single byte out through UART
- **/
+ */
 void msp_putc(unsigned char character)
 {
     while (!(IFG2 & UCA0TXIFG)); // USCI_A0 TX buffer ready?
     UCA0TXBUF = character; // TX -> RXed character
 }
 
+/**
+ * Sends a string out through UART
+ */
 void msp_puts(char* s)
 {
     while (*s != '\0')
@@ -53,8 +83,16 @@ void msp_puts(char* s)
 /**************************************************
  * USCI0RX_ISR Interrupt Handler
  **************************************************/
-// __attribute__ ((interrupt(USCIAB0RX_VECTOR)))
-// void USCI0RX_ISR(void)
-// {
+__attribute__ ((interrupt(USCIAB0RX_VECTOR)))
+void USCI0RX_ISR(void)
+{
+    parameterString[parameterLength] = UCA0RXBUF;
+    msp_putc(parameterString[parameterLength]); /* Echo */
 
-// }
+    /* Also get the characters '\r\n' */
+    if (parameterString[parameterLength++] != '\0')
+    {
+        validCommandFlag = true;
+        parameterLength--;
+    }
+}

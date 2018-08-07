@@ -14,6 +14,8 @@
  **/
 #include "msp430g2553.h"
 #include <stdint.h>
+#include <stdbool.h>
+#include <string.h>
 
 #ifdef printf
 #undef printf
@@ -23,8 +25,9 @@
 /**
  * Prototype functions
  **/
-extern void uart_init(uint16_t baudrate);
-extern void msp_printf(char *format, ...);
+extern void uart_init(void);
+extern void msp_putnum8it(uint8_t dec_num);
+extern void msp_putnum16it(uint16_t dec_num);
 extern void msp_putc(unsigned char character);
 extern void msp_puts(char* s);
 
