@@ -11,15 +11,15 @@
 /**
  *  Exported variables
  */
-unsigned char* parameterString;
+unsigned char parameterString[COMMAND_STRING_LEN];
 uint8_t parameterLength;
-bool validCommandFlag;
+volatile bool validCommandFlag;
 
 /**
  * Private variables
  */
 static const uint8_t hex_num_tbl[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                                        'A', 'B', 'C', 'D', 'E', 'F'}
+                                        'A', 'B', 'C', 'D', 'E', 'F'};
 
 void uart_init(void)
 {
@@ -49,13 +49,13 @@ void msp_putnum16it(uint16_t dec_num)
 {
     uint8_t temp_hex;
 
-    temp_hex = (uint8_t)(temp_dec & 0xF);
     /* Print the first number */
+    temp_hex = (uint8_t)((dec_num >> 4) & 0xF);
     msp_putc(hex_num_tbl[temp_hex]);
 
     /* Print the sencond number */
     temp_hex = 0;
-    temp_hex = (uint8_t)((temp_dec >> 4) & 0xF);
+    temp_hex = (uint8_t)(dec_num & 0xF);
     msp_putc(hex_num_tbl[temp_hex]);
 }
 
@@ -65,7 +65,7 @@ void msp_putnum16it(uint16_t dec_num)
 void msp_putc(unsigned char character)
 {
     while (!(IFG2 & UCA0TXIFG)); // USCI_A0 TX buffer ready?
-    UCA0TXBUF = character; // TX -> RXed character
+    UCA0TXBUF = character;       // TX -> RXed character
 }
 
 /**
@@ -90,9 +90,10 @@ void USCI0RX_ISR(void)
     msp_putc(parameterString[parameterLength]); /* Echo */
 
     /* Also get the characters '\r\n' */
-    if (parameterString[parameterLength++] != '\0')
+    if (parameterString[parameterLength++] == '\r')
     {
         validCommandFlag = true;
+        // msp_puts("\r\nOK!");
         parameterLength--;
     }
 }

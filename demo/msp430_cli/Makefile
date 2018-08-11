@@ -43,6 +43,8 @@ LFLAGS += -L $(SUPPORT_FILE_DIRECTORY)/include -I $(SUPPORT_FILE_DIRECTORY)/incl
 LFLAGS += -T $(SUPPORT_FILE_DIRECTORY)/include/msp430g2553.ld -mmcu=$(DEVICE)
 LFLAGS += -Wl,-Map=$(TARGET).map
 
+compile: $(TARGET)
+
 all: $(TARGET) upload
 
 $(TARGET): $(OBJECTS)
@@ -75,4 +77,4 @@ debug:
 clean:
 	rm -rf *.o *.out *.elf *.bin *.map *.d *.hex *.lss
 
-.PHONY: clean upload debug
+.PHONY: clean upload debug compile

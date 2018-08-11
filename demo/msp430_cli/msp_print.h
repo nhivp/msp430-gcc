@@ -23,6 +23,12 @@
 #endif
 
 /**
+ *  Macro definition
+ */
+#define COMMAND_TBL_LEN           sizeof(command_tbl)/sizeof(*(command_tbl))
+#define COMMAND_STRING_LEN        256
+
+/**
  * Prototype functions
  **/
 extern void uart_init(void);
