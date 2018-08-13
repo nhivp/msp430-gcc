@@ -11,7 +11,7 @@
 /**
  *  Exported variables
  */
-unsigned char parameterString[COMMAND_STRING_LEN];
+char parameterString[COMMAND_STRING_LEN];
 uint8_t parameterLength;
 volatile bool validCommandFlag;
 
@@ -90,10 +90,8 @@ void USCI0RX_ISR(void)
     msp_putc(parameterString[parameterLength]); /* Echo */
 
     /* Also get the characters '\r\n' */
-    if (parameterString[parameterLength++] == '\r')
+    if (parameterString[parameterLength++] == '\n')
     {
         validCommandFlag = true;
-        // msp_puts("\r\nOK!");
-        parameterLength--;
     }
 }

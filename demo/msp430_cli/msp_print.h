@@ -25,8 +25,8 @@
 /**
  *  Macro definition
  */
-#define COMMAND_TBL_LEN           sizeof(command_tbl)/sizeof(*(command_tbl))
-#define COMMAND_STRING_LEN        256
+#define COMMAND_LEN(x)        sizeof(x)/sizeof(*(&x[0]))
+#define COMMAND_STRING_LEN        128
 
 /**
  * Prototype functions
