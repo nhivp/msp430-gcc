@@ -90,7 +90,7 @@ void USCI0RX_ISR(void)
     msp_putc(parameterString[parameterLength]); /* Echo */
 
     /* Also get the characters '\r\n' */
-    if (parameterString[parameterLength++] == '\n')
+    if (parameterString[parameterLength++] == '\r')
     {
         validCommandFlag = true;
     }

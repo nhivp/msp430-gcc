@@ -84,21 +84,28 @@ int main(void)
 
             if (cmd[0] == '\0')
             {
-                msp_puts("Missing command!\r\n");
-                validCommandFlag = false;
-                break;
+                msp_puts("\r\nMissing command!");
             }
-
-            for (cmd_idx = COMMAND_LEN(command_tbl) - 1; cmd_idx > 0; cmd_idx--)
+            else
             {
-                if (!strcmp((char*)cmd, (char*)command_tbl[cmd_idx].Command))
+                for (cmd_idx = 0; cmd_idx < COMMAND_LEN(command_tbl); cmd_idx++)
                 {
-                    break;
+                    if (!strcmp((char*)cmd, (char*)command_tbl[cmd_idx].Command))
+                    {
+                        break;
+                    }
+                }
+
+                if (cmd_idx < COMMAND_LEN(command_tbl))
+                {
+                    /* Execute command */
+                    command_tbl[cmd_idx].Command_Func();
+                }
+                else
+                {
+                    msp_puts("\r\nInvalid command!");
                 }
             }
-
-            /* Execute command */
-            command_tbl[cmd_idx].Command_Func();
 
             msp_puts("\r\nMSP430@CLI > ");
 
@@ -130,7 +137,7 @@ static void CLI_GetCommand(unsigned char* cmd)
 static void CLI_Help(void)
 {
     /* Print all commands and description for usage */
-    msp_puts( "Help:\r\n"
+    msp_puts( "\r\nHelp:\r\n"
               "Please input command as following:\r\n"
     );
 }
@@ -138,7 +145,7 @@ static void CLI_Help(void)
 static void CLI_Hello(void)
 {
     /* Say "Hello, World!"" */
-    msp_puts("Hello, World!\r\n");
+    msp_puts("\r\nHello, World!");
 }
 
 static void CLI_Info(void)
