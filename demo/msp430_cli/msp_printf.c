@@ -15,6 +15,9 @@ char parameterString[COMMAND_STRING_LEN];
 uint8_t parameterLength;
 volatile bool validCommandFlag;
 
+
+static void puth(unsigned char n);
+
 /**
  * Private variables
  */
@@ -34,6 +37,11 @@ void uart_init(void)
     IE2 |= UCA0RXIE;       // Enable USCI_A0 RX interrupt
 }
 
+static void puth(unsigned char n)
+{
+    msp_putc(hex_num_tbl[n & 15]);
+}
+
 /**
  * Sends a 8-bit (hexa number) out through UART
  */
@@ -47,16 +55,21 @@ void msp_putnum8it(uint8_t dec_num)
  */
 void msp_putnum16it(uint16_t dec_num)
 {
-    uint8_t temp_hex;
+    // uint8_t temp_hex;
 
-    /* Print the first number */
-    temp_hex = (uint8_t)((dec_num >> 4) & 0xF);
-    msp_putc(hex_num_tbl[temp_hex]);
+    // /* Print the first number */
+    // temp_hex = (uint8_t)((dec_num >> 4) & 0xF);
+    // msp_putc(hex_num_tbl[temp_hex]);
 
-    /* Print the sencond number */
-    temp_hex = 0;
-    temp_hex = (uint8_t)(dec_num & 0xF);
-    msp_putc(hex_num_tbl[temp_hex]);
+    // /* Print the sencond number */
+    // temp_hex = 0;
+    // temp_hex = (uint8_t)(dec_num & 0xF);
+    // msp_putc(hex_num_tbl[temp_hex]);
+
+    puth(dec_num >> 12);
+    puth(dec_num >> 8);
+    puth(dec_num >> 4);
+    puth(dec_num);
 }
 
 /**

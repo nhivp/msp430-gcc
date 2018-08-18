@@ -40,7 +40,7 @@ CFLAGS += -Wall -Wextra -Wshadow -std=c99 -Wpedantic
 #     -nostartfiles: Do not use the standard system startup files when linking. The standard system libraries are used normally
 LFLAGS =
 LFLAGS += -L $(SUPPORT_FILE_DIRECTORY)/include -I $(SUPPORT_FILE_DIRECTORY)/include
-LFLAGS += -T $(SUPPORT_FILE_DIRECTORY)/include/msp430g2553.ld -mmcu=$(DEVICE)
+LFLAGS += -T msp430g2553.ld -mmcu=$(DEVICE)
 LFLAGS += -Wl,-Map=$(TARGET).map
 
 compile: $(TARGET)
