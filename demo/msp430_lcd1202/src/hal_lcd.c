@@ -167,3 +167,39 @@ void lcd_printc(char c)
         }
     }
 }
+
+void lcd_prints(char *s)
+{
+    while(*s)
+    {
+        lcd_printc(*s++);
+    }
+}
+
+void lcd_writedata(const char *dataBuf, uint32_t dataLen)
+{
+    uint32_t i;
+
+    for(i = 0; i < dataLen; i++)
+    {
+        lcd_printc(*dataBuf);
+        dataBuf++;
+    }
+}
+
+void lcd_all(void)
+{
+    ste_write(FLAG_CMD, LCD_MODE|ON);
+    ste_write(FLAG_CMD, LCD_MODE|NON_REVERSE);
+    ste_write(FLAG_CMD, LCD_MODE|ALL);
+}
+
+void lcd_mirror_x(void)
+{
+    ste_write(FLAG_CMD, LCD_MIRROR_X);
+}
+
+void lcd_mirror_y(void)
+{
+    ste_write(FLAG_CMD, LCD_MIRROR_Y);
+}
