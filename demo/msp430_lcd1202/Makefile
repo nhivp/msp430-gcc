@@ -45,7 +45,7 @@ LFLAGS += -L $(SUPPORT_FILE_DIRECTORY)/include -I $(SUPPORT_FILE_DIRECTORY)/incl
 LFLAGS += -T msp430g2553.ld -mmcu=$(DEVICE)
 LFLAGS += -Wl,-Map=$(BUILD_DIR)/$(TARGET).map
 
-compile: $(TARGET)
+compile: $(BUILD_DIR)/$(TARGET)
 
 all: $(BUILD_DIR)/$(TARGET) upload
 

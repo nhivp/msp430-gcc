@@ -5,6 +5,7 @@
 
 #include <stdint.h>
 #include "msp430g2553.h"
+#include "hal_lcd.h"
 /**
  *  Typedef definition
  */
@@ -32,6 +33,9 @@ static void board_init(void);
 int main(void)
 {
     board_init();
+    lcd_init();
+
+    lcd_printc('x');
 
     while (1)
     {

@@ -14,7 +14,7 @@ void ste_init(void)
     LCD_RESET_HIGH;
 }
 
-void lcd_write(char dc, char byte)
+void ste_write(char dc, char byte)
 {
     char i;
 
