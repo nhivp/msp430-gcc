@@ -182,7 +182,7 @@ void lcd_writedata(const char *dataBuf, uint32_t dataLen)
 
     for(i = 0; i < dataLen; i++)
     {
-        lcd_printc(*dataBuf);
+        ste_write(FLAG_DATA, *dataBuf);
         dataBuf++;
     }
 }
@@ -202,4 +202,26 @@ void lcd_mirror_x(void)
 void lcd_mirror_y(void)
 {
     ste_write(FLAG_CMD, LCD_MIRROR_Y);
+}
+
+void lcd_displayImage(uint8_t row, uint8_t col,
+                    uint8_t height, uint8_t width,
+                    uint8_t* image)
+{
+    uint8_t r, c;
+
+    for(r = 0; r < height; r++)
+    {
+        lcd_gotoxy(col, row + r);
+        for(c = 0; c < width; c++)
+        {
+            uint8_t b = *image++;
+            ste_write(FLAG_DATA, (char)b);
+        }
+    }
+}
+
+void lcd_home(void)
+{
+    lcd_gotoxy(0, 0);
 }

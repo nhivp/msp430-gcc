@@ -35,7 +35,11 @@ int main(void)
     board_init();
     lcd_init();
 
-    lcd_printc('x');
+    lcd_gotoxy(0, 1);
+    lcd_prints(">> nhivp 2018 <<");
+
+    lcd_gotoxy(0, 6);
+    lcd_prints(">>>>>>>><<<<<<<<");
 
     while (1)
     {
